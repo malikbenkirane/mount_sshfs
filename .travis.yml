@@ -1,3 +1,3 @@
 language: go
 go: "1.14"
-script: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-w -s"
+script: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-w -s" github.com/malikbenkirane/mount_sshfs/cmd/mount_sshfs
