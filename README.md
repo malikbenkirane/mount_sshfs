@@ -1,6 +1,7 @@
 # mount_sshfs
 
-![travis badge](https://api.travis-ci.com/malikbenkirane/mount_sshfs.svg?branch=master&status=passed)
+![travis build status](https://api.travis-ci.com/malikbenkirane/mount_sshfs.svg?branch=master)
+![goreportcard](https://goreportcard.com/badge/github.com/malikbenkirane/mount_sshfs)
 
 
 ## Get
