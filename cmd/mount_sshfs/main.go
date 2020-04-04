@@ -80,6 +80,9 @@ func isValidRemote(remote string) error {
 	remoteDir := connection.Directory
 	defer connection.Client.Close()
 	session, err := connection.Client.NewSession()
+	if err != nil {
+		return err
+	}
 	session.Stdout = os.Stderr
 	session.Stderr = os.Stderr
 	cmd := fmt.Sprintf("stat %q", remoteDir)
