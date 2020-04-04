@@ -15,10 +15,12 @@ import (
 var debug = false
 
 var (
-	HostKeyNotFound = errors.New("Host key not found")
-	InvalidRemote   = errors.New("Invalid remote")
+	// ErrInvalidRemote is the error value returned when the remote string cannot be used
+	ErrInvalidRemote = errors.New("Invalid remote")
 )
 
+// Connection structure is used to store the ssh client and
+// the remote target directory to mount with cmd/mount_sshfs.
 type Connection struct {
 	Client    *ssh.Client
 	Directory string
@@ -30,14 +32,14 @@ type Connection struct {
 func NewConnection(remote string) (*Connection, error) {
 	remoteFields := strings.Split(remote, "@")
 	if len(remoteFields) != 2 {
-		return nil, InvalidRemote
+		return nil, ErrInvalidRemote
 	}
 	remoteFields = append(strings.Split(remoteFields[1], ":"), remoteFields...)
 	if debug {
 		log.Printf("[rhost rdir ruser rhost:rdir] %v", remoteFields)
 	}
 	if len(remoteFields) != 4 {
-		return nil, InvalidRemote
+		return nil, ErrInvalidRemote
 	}
 	connection := &Connection{}
 	host := remoteFields[0]

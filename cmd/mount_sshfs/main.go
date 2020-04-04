@@ -22,8 +22,12 @@ type sshfs struct {
 }
 
 var (
-	RootWallBroken      = errors.New("uid is 0 or gid is 0 and -root flag is not set")
-	InvalidMountDirPath = errors.New("invalid mount dir path")
+	// ErrRootWallBroken is the error value returned when
+	// the sshfs.IsRoot is false and either sshfs.UID is 0 or sshf.GID is 0
+	ErrRootWallBroken = errors.New("uid is 0 or gid is 0 and -root flag is not set")
+	// ErrInvalidMountDirPath is the error value returned when
+	// the mount dir path passed is invalid
+	ErrInvalidMountDirPath = errors.New("invalid mount dir path")
 )
 
 // reference: https://stackoverflow.com/a/35240286
@@ -56,10 +60,10 @@ func readConfig(filename string) (*sshfs, error) {
 
 func validOptions(options *sshfs) error {
 	if !options.IsRoot && (options.UID == 0 || options.GID == 0) {
-		return RootWallBroken
+		return ErrRootWallBroken
 	}
 	if !isValidPath(options.MountDir) {
-		return InvalidMountDirPath
+		return ErrInvalidMountDirPath
 	}
 	if err := isValidRemote(options.Remote); err != nil {
 		return fmt.Errorf("Unable to verify remote: %v", err)
@@ -86,6 +90,7 @@ func isValidRemote(remote string) error {
 	return nil
 }
 
+// ConfigError return the error value passed prefixed with "Configureation error: "
 func ConfigError(err error) error {
 	return fmt.Errorf("Configuration error: %v", err)
 }
