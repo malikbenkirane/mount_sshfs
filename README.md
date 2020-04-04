@@ -30,5 +30,5 @@ also make sure that the line with `user_allow_other` in `/etc/fuse.conf` is unco
 ### Linux
 
 ```sh
-CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags='-w -s' -o mount_sshfs
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-w -s" github.com/malikbenkirane/mount_sshfs/cmd/mount_sshfs
 ```
