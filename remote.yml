@@ -1,0 +1,6 @@
+uid: 1001
+gid: 1001
+root: false
+docker: true
+mount: ./mnt
+remote: user@host:/remote/dir
