@@ -1,5 +1,8 @@
 # mount_sshfs
 
+![travis badge](https://api.travis-ci.com/malikbenkirane/mount_sshfs.svg?branch=master&status=passed)
+
+
 ## Get
 
 ```
